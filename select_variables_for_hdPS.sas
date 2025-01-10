@@ -170,7 +170,8 @@ A code that appeared above the 75th percentile number of times would have a "TRU
 		   	ods output RelativeRisks=_rr_(keep=statistic value);
 				proc freq data=hdcov_&drug1.v&drug2._p&min_prev._n&max_num._i&dxgroup._A&atcgroup.;			  
 					tables &drug1*&&variable&i * event_itt / relrisk 
-					cmh /*8/1/2024 Tian added this for Mantel-Haenszel procedure according to discussion w/ Til, Richie*/
+					cmh /*8/1/2024 Tian added this for Mantel-Haenszel procedure*/
+     					    /*1/9/2025 Tian added this for conditon on treatment*/
 					;
 				run;
 
