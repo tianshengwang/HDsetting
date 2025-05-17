@@ -302,7 +302,7 @@ if (length(unique(Y)) ==2){
   
   vt.sbgrps <- vt.subgroups(tr.class)
   
-  # print tables with knitr package
+  # print tables with knitr package, subgroup decision from aVirtualTwin!!!
   knitr::kable(vt.sbgrps)
   
   Deci_VT0 <- vt.sbgrps %>%
