@@ -316,32 +316,32 @@ if (length(unique(Y)) ==2){
   #dplyr::mutate(subgroup2 = stringr::str_replace_all(Subgroup, " & ", " "))  %>%
   #sort conditions in each subgroup definition
   #convert df to list 
-  Deci_VT_L <-  split(Deci_VT0, seq(nrow(Deci_VT0)))
+  #Deci_VT_L <-  split(Deci_VT0, seq(nrow(Deci_VT0)))
   #apply function that convert VirtualTwin format to Causal forest format
-  Deci_VT_cf.format <- lapply(Deci_VT_L, VT2CF_format )
+  #Deci_VT_cf.format <- lapply(Deci_VT_L, VT2CF_format )
   
-  Deci_VT_con_split2 <- data.frame(matrix(unlist(Deci_VT_cf.format), nrow=length(Deci_VT_cf.format), byrow=TRUE)) %>%
-    `colnames<-`("Subgroup") %>% 
+  #Deci_VT_con_split2 <- data.frame(matrix(unlist(Deci_VT_cf.format), nrow=length(Deci_VT_cf.format), byrow=TRUE)) %>%
+  #  `colnames<-`("Subgroup") %>% 
     #sort conditions in each subgroup definition
-    rowwise() %>% 
-    mutate(subgroup = paste(sort(unlist(strsplit(as.character(Subgroup), " & ", fixed = TRUE)), decreasing = TRUE), collapse = " & ")) 
+  #  rowwise() %>% 
+  #  mutate(subgroup = paste(sort(unlist(strsplit(as.character(Subgroup), " & ", fixed = TRUE)), decreasing = TRUE), collapse = " & ")) 
   #sort subgroup definitions
-  Deci_VT <-  Deci_VT_con_split2[order(Deci_VT_con_split2$subgroup),] %>%
-    tibble::rowid_to_column() %>%
-    dplyr::select(subgroup, rowid)%>%
-    dplyr::rename(subgroupID =rowid) %>%
-    dplyr::select(subgroupID, everything())
+  #Deci_VT <-  Deci_VT_con_split2[order(Deci_VT_con_split2$subgroup),] %>%
+  #  tibble::rowid_to_column() %>%
+  #  dplyr::select(subgroup, rowid)%>%
+  #  dplyr::rename(subgroupID =rowid) %>%
+  #  dplyr::select(subgroupID, everything())
   
   
 } else if (length(unique(Y)) >8){
-  Deci_VT = "NA" 
+  Deci_VT0 = "NA" 
 } 
-SG2INT_VT <- SG2INT(Deci_VT)
+#SG2INT_VT <- SG2INT(Deci_VT)
 
 e_VT =  Sys.time()
 time_VT =  e_VT - s_VT
 
-saveRDS(Deci_VT, 
+saveRDS(Deci_VT0, 
         file = paste0("hdPS_c", c*100, "_n", n, 
                       "_I", dxgroup, "_A", atcgroup, 
                       "VT", ".rds") 
